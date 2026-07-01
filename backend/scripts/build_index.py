@@ -80,17 +80,42 @@ def embed_texts(texts: list[str]) -> list[list[float]]:
         genai.configure(api_key=GEMINI_API_KEY)
 
         embeddings = []
-        # Batch in groups of 10
-        for i in range(0, len(texts), 10):
-            batch = texts[i:i + 10]
-            for text in batch:
+        import time
+        # Batch in groups of 100 to maximize throughput and minimize API calls
+        for i in range(0, len(texts), 100):
+            batch = texts[i:i + 100]
+            try:
                 result = genai.embed_content(
                     model="models/text-embedding-004",
-                    content=text,
+                    content=batch,
                     task_type="RETRIEVAL_DOCUMENT",
                 )
-                embeddings.append(result["embedding"])
-            print(f"  Embedded {min(i + 10, len(texts))}/{len(texts)} chunks")
+                # If content is a list, result["embedding"] is a list of lists
+                if isinstance(result["embedding"][0], list):
+                    embeddings.extend(result["embedding"])
+                else:
+                    embeddings.append(result["embedding"])
+                print(f"  Embedded {min(i + 100, len(texts))}/{len(texts)} chunks")
+                time.sleep(2)  # Avoid standard rate limits
+            except Exception as e:
+                print(f"  [WARN] Rate limit or error: {e}. Sleeping 10s before retry...")
+                time.sleep(10)
+                try:
+                    result = genai.embed_content(
+                        model="models/text-embedding-004",
+                        content=batch,
+                        task_type="RETRIEVAL_DOCUMENT",
+                    )
+                    if isinstance(result["embedding"][0], list):
+                        embeddings.extend(result["embedding"])
+                    else:
+                        embeddings.append(result["embedding"])
+                    print(f"  Embedded {min(i + 100, len(texts))}/{len(texts)} chunks (Retry Success)")
+                except Exception as retry_e:
+                    print(f"  [ERROR] Final retry failed for batch {i}: {retry_e}")
+                    # Fill missing with zeros so dimensions don't break
+                    for _ in batch:
+                        embeddings.append([0.0]*768)
 
         return embeddings
     except Exception as e:

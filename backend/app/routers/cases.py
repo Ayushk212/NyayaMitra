@@ -12,6 +12,42 @@ from app.models.schemas import CaseDetail, CaseSummaryResponse
 
 router = APIRouter(prefix="/api/cases", tags=["cases"])
 
+from sqlalchemy import func
+from fastapi import Query
+from app.models.schemas import SearchResponse, SearchResultItem
+
+@router.get("", response_model=SearchResponse)
+async def list_cases(
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1, le=50),
+    session: AsyncSession = Depends(get_session)
+):
+    """List cases (used when search query is empty)."""
+    result = await session.execute(select(Case).limit(limit).offset((page - 1) * limit))
+    cases = result.scalars().all()
+
+    count_result = await session.execute(select(func.count()).select_from(Case))
+    total = count_result.scalar() or 0
+
+    results = []
+    for case in cases:
+        results.append(SearchResultItem(
+            id=case.id,
+            title=case.title,
+            court=case.court,
+            date=case.date,
+            citation=case.citation,
+            case_type=case.case_type,
+            snippet=(case.full_text[:300] + "...") if case.full_text else "",
+            score=1.0,
+        ))
+
+    return SearchResponse(
+        results=results,
+        total=total,
+        page=page,
+        limit=limit,
+    )
 
 @router.get("/{case_id}", response_model=CaseDetail)
 async def get_case(case_id: str, session: AsyncSession = Depends(get_session)):
