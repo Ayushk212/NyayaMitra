@@ -40,7 +40,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.5147621631622314,
+    "latency": 4.7382824420928955,
     "error": null,
     "test_type": "Fictional Case"
   },
@@ -85,7 +85,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.118342399597168,
+    "latency": 3.022925853729248,
     "error": null,
     "test_type": "Typo Case Name"
   },
@@ -130,7 +130,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1013386249542236,
+    "latency": 3.2776708602905273,
     "error": null,
     "verification": {
       "actual_para_text": "2. Privacy includes at its core the preservation of personal intimacies, the sanctity of family life, marriage, procreation, the home and sexual orientation. Privacy also connotes a right to be left alone."
@@ -287,7 +287,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1202452182769775,
+    "latency": 2.873732566833496,
     "error": null,
     "test_type": "Zero Matches"
   },
@@ -332,7 +332,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1697475910186768,
+    "latency": 3.064091444015503,
     "error": null,
     "test_type": "Overruled Case"
   },
@@ -377,7 +377,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.14534592628479,
+    "latency": 3.174682855606079,
     "error": null,
     "test_type": "Jurisdiction Conflict"
   },
@@ -422,7 +422,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.0986762046813965,
+    "latency": 2.6621501445770264,
     "error": null,
     "test_type": "Low Relevance Non-Zero"
   },
@@ -467,7 +467,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1353652477264404,
+    "latency": 3.3796231746673584,
     "error": null,
     "test_type": "Prompt Injection"
   },
@@ -512,7 +512,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1417148113250732,
+    "latency": 3.020230293273926,
     "error": null,
     "test_type": "Rambling Input"
   },
@@ -557,7 +557,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.124859571456909,
+    "latency": 3.431967258453369,
     "error": null,
     "test_type": "Citation Verification Exploit"
   },
@@ -602,7 +602,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.117504835128784,
+    "latency": 3.0697503089904785,
     "error": null,
     "test_type": "Legal Advice Request"
   },
@@ -647,7 +647,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1274325847625732,
+    "latency": 2.9705851078033447,
     "error": null,
     "test_type": "Out of Scope"
   },
@@ -692,7 +692,7 @@
       "color": "yellow",
       "percentage": 50
     },
-    "latency": 2.1141862869262695,
+    "latency": 3.0736684799194336,
     "error": null,
     "test_type": "Mixed Language"
   },
@@ -706,7 +706,7 @@
       "color": "red",
       "percentage": 0
     },
-    "latency": 2.1204404830932617,
+    "latency": 2.1022465229034424,
     "error": null,
     "test_type": "Empty Query"
   },
@@ -720,7 +720,7 @@
       "color": "red",
       "percentage": 0
     },
-    "latency": 2.08319091796875,
+    "latency": 2.707611322402954,
     "error": null,
     "test_type": "Single Character"
   }
